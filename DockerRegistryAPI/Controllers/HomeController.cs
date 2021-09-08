@@ -1,4 +1,5 @@
 ﻿using DockerRegistryAPI.Models;
+using ElectronNET.API;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -22,6 +23,11 @@ namespace DockerRegistryAPI.Controllers
 
         public IActionResult Index()
         {
+            Electron.IpcMain.On("channelToServer", (args) =>
+            {
+                var mainWindow = Electron.WindowManager.BrowserWindows.First();
+                Electron.IpcMain.Send(mainWindow, "channelToClient", $"{args}, world!");
+            });
             return View();
         }
 

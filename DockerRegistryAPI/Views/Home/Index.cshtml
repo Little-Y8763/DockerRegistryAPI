@@ -3,6 +3,18 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Hi</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">Hi</a>.</p>
+    <h1 id="Welcome" class="display-4">Welcome</h1>
+    <button onclick="sendMessageToServer()">Hi</button>
 </div>
+
+<script>
+    const { ipcRenderer } = require("electron");
+
+    function sendMessageToServer() {
+        ipcRenderer.send('channelToServer', 'Hi');
+    }
+
+    ipcRenderer.on('channelToClient', (event, arg) => {
+        document.getElementById("Welcome").innerText = arg
+    });
+</script>
