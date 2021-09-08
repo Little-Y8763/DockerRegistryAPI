@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ElectronNET.API;
 
 namespace DockerRegistryAPI
 {
@@ -52,6 +53,8 @@ namespace DockerRegistryAPI
                     name: "toshi",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
         }
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ElectronNET.API;
 
 namespace DockerRegistryAPI
 {
@@ -20,6 +21,8 @@ namespace DockerRegistryAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseElectron(args);
+                    webBuilder.UseEnvironment("Development");
                     webBuilder.UseStartup<Startup>();
                 });
     }
